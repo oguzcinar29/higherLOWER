@@ -1,0 +1,45 @@
+from dct import data
+from art import logo,vs
+from random import choice
+from os import system
+print(logo)
+
+current_score=0
+
+
+def greater_than(dct1,dct2,cho):
+    if cho=='a' and dct1['follower_count']>dct2['follower_count']:
+        return True
+    elif cho=='a' and dct1['follower_count']<dct2['follower_count']:
+        return False
+    if cho=='b' and dct1['follower_count']<dct2['follower_count']:
+        return True
+    elif cho=='b' and dct1['follower_count']>dct2['follower_count']:
+        return False
+
+
+dct1=choice(data)
+dct2=choice(data)
+
+flag=True
+while flag:
+    print(f"Compare A:{dct1['name']}, {dct1['description']}, {dct1['country']}")
+    print(vs)
+    print(f"AGAINTS B:{dct2['name']}, {dct2['description']}, {dct2['country']}")
+    cho=input("Who has more followers? Type 'A' or 'B'").lower()
+    if greater_than(dct1,dct2,cho)==True:
+        system('cls')
+        current_score+=1
+        print(f"You're right! Current score is {current_score}.")
+        dct1=dct2
+        dct2=choice(data)
+        while dct1==dct2:
+            dct2=choice(data)
+        #test data
+        # print(dct1['follower_count'])
+        # print(dct2['follower_count'])
+    else:
+        print(f"Sorry thats wrong. Final score {current_score}")
+        flag=False
+        
+        
